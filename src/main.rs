@@ -1,29 +1,32 @@
-use cranelift::frontend::FunctionBuilder;
-use math_parser::parse;
+use cranelift::prelude::Value;
 use rc_lib::Compiler;
 use std::{
+    collections::HashMap,
     io::{stdin, stdout, Write},
     mem,
 };
 
 fn main() {
-    let mut jit = Compiler::default();
-    print!(">>> ");
-    stdout().flush().unwrap();
-    let mut input = String::new();
-    stdin().read_line(&mut input).unwrap();
-    unsafe {
-        let builder = FunctionBuilder::new(&mut jit.ctx.func, &mut jit.builder_ctx);
-        let code = match parse(input.as_str()) {
-            Ok(ast) => ast,
-            Err(err) => panic!("{}", err),
-        };
-        let code_ptr = jit.compile(code, builder).unwrap();
-        let code_fn = transmute::<f64>(code_ptr);
-        let output = code_fn();
-        println!("{}", output);
+    let mut symbols = HashMap::new();
+    loop {
+        let mut compiler = Compiler::default();
+        print!(">>> ");
+        stdout().flush().unwrap();
+        let mut input = String::new();
+        stdin().read_line(&mut input).unwrap();
+        let input = input.trim();
+        unsafe {
+            let output: f64 = run_code(&mut compiler, input, &mut symbols).unwrap();
+            println!("{}", output);
+        }
     }
 }
-unsafe fn transmute<O>(ptr: *const u8) -> fn() -> O {
-    mem::transmute::<*const u8, fn() -> O>(ptr)
+unsafe fn run_code<O>(
+    jit: &mut Compiler,
+    code: &str,
+    table: &mut HashMap<String, Value>,
+) -> Result<O, String> {
+    let code_ptr = jit.compile(code, table)?;
+    let code_fn = mem::transmute::<_, fn() -> O>(code_ptr);
+    Ok(code_fn())
 }
