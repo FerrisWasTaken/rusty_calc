@@ -4,7 +4,7 @@ orbs:
 workflows:
   release:
     jobs:
-      build:
+      - build:
         docker:
           - image: cimg/rust
         steps:
