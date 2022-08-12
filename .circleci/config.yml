@@ -1,0 +1,11 @@
+version: 2.1
+orbs:
+  gh: circleci/github-cli@2.1.0
+workflows:
+  release:
+    jobs:
+      build:
+        docker:
+          - image: cimg/rust
+        steps:
+          - checkout
