@@ -15,6 +15,8 @@ VER=$(sed -ne 's/version\s?*=\s?*\"\(.*\)\"/\1/p' ./Cargo.toml)
 gh release create $VER \
 ./target/release/homebrew-pck.tar.bz2 \
 --generate-notes
+git config --global user.email "wthownothing@gmail.com"
+git config --global user.name "muppi090909"
 git clone git@github.com:muppi090909/homebrew-core.git
 cd homebrew-core
 touch hello
