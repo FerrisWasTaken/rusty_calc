@@ -12,6 +12,8 @@ cd target/release
 tar -cjf homebrew-pck.tar.bz2 rc_bin
 FILE=`realpath homebrew-pck.tar.bz2`
 cd ../../
+curl
+https://github.com/muppi090909/rusty_calc/releases/downoad/$VER/homebrew-pck.tar.bz2
 VER=$(sed -ne 's/version\s?*=\s?*\"\(.*\)\"/\1/p' ./Cargo.toml)
 gh release create $VER \
 $FILE \

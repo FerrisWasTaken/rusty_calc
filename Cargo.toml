@@ -2,6 +2,9 @@
 name = "rusty-calc"
 version = "0.1.0"
 edition = "2021"
+description = "A calculator written in rust"
+license = "GPL-3-only"
+authors = ["muppi090909"]
 
 [dependencies]
 cranelift-jit = "0.84.0"
