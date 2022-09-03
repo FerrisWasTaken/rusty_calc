@@ -1,0 +1,5 @@
+mytool (1.0-1) UNRELEASED; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Prasad <perseus@unknown>  Sat, 03 Sep 2022 21:27:41 +0530

@@ -1,0 +1,15 @@
+Source: rusty-calc
+Section: unknown
+Priority: optional
+Maintainer: Prasad <perseus@unknown>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.0
+Homepage: https://github.com/muppi090909/rusty_calc
+#Vcs-Browser: https://salsa.debian.org/debian/mytool
+#Vcs-Git: https://salsa.debian.org/debian/mytool.git
+
+Package: rusty-calc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Calculator written in rust
+ <insert long description, indented with spaces>
